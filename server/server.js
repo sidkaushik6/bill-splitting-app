@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const http = require('http');
 const socketIO = require('socket.io');
+const authRoutes = require('./routes/auth.routes');
+const orderRoutes = require('./routes/orders.routes');
+const friendRoutes = require('./routes/friends.routes');
 
 const app = express();
 const server = http.createServer(app);
@@ -30,6 +33,9 @@ connection.once('open', () => {
 
 // Routes
 // (Routes to be defined here later)
+app.use('/api/auth', authRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/friends', friendRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
