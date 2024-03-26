@@ -30,52 +30,55 @@ This is a full-stack web application that allows users to create orders, add fri
 
 ```bash
 git clone https://github.com/your-username/bill-splitting-app.git
+```
 
-Navigate to the project directory:
-bash
+2. Navigate to the project directory:
 
-
-Copy code
+```bash
 cd bill-splitting-app
-Install the frontend dependencies:
-bash
+```
 
+3. Install the frontend dependencies:
 
-Copy code
+```bash
 npm install
-Navigate to the server directory:
-bash
+```
 
+4. Navigate to the server directory:
 
-Copy code
+```bash
 cd server
-Install the backend dependencies:
-bash
+```
 
+5. Install the backend dependencies:
 
-Copy code
+```bash
 npm install
+```
 Running the Application
-Start the MongoDB server:
-bash
 
+1. Start the MongoDB server:
 
-Copy code
+```bash
 mongod
-In a new terminal window, navigate to the server directory and start the Express server:
-bash
+```
 
+2. In a new terminal window, navigate to the server directory and start the Express server:
 
-Copy code
+```bash
 cd server
 node server.js
-In another terminal window, navigate to the bill-splitting-app directory and start the React development server:
+```
+
+3. In another terminal window, navigate to the bill-splitting-app directory and start the React development server:
 bash
 
 
-Copy code
+```bash
 cd ..
 npm start
+```
+
 The application should now be running at http://localhost:3000.
 
 Deployment
