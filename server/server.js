@@ -8,6 +8,8 @@ const authRoutes = require('./routes/auth.routes');
 const orderRoutes = require('./routes/orders.routes');
 const friendRoutes = require('./routes/friends.routes');
 
+const verifyToken = require('./middleware/auth.middleware');
+
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, {
@@ -34,8 +36,10 @@ connection.once('open', () => {
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api/friends', friendRoutes);
+// app.use('/api/orders', orderRoutes);
+// app.use('/api/friends', friendRoutes);
+app.use('/api/orders', verifyToken, orderRoutes);
+app.use('/api/friends', verifyToken, friendRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;

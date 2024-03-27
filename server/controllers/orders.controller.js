@@ -3,7 +3,13 @@ const Order = require('../models/order.model');
 exports.createOrder = async (req, res) => {
   try {
     const { title, description, totalAmount } = req.body;
-    const newOrder = new Order({ title, description, totalAmount, participants: [] });
+    // const newOrder = new Order({ title, description, totalAmount, participants: [] });
+    const newOrder = new Order({
+      title,
+      description,
+      totalAmount,
+      participants: [{ user: req.userId, share: totalAmount }],
+    });
     const savedOrder = await newOrder.save();
     res.status(201).json(savedOrder);
   } catch (error) {
