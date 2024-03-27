@@ -32,6 +32,7 @@ exports.login = async (req, res) => {
 
     // Check if the user exists
     const user = await User.findOne({ email });
+    console.log('User:', user);
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
@@ -49,6 +50,7 @@ exports.login = async (req, res) => {
 
     res.status(200).json({ token });
   } catch (error) {
-    res.status(500).json({ message: 'Something went wrong' });
+    console.error('Error in login:', error);
+    res.status(500).json({ message: 'Something went wrong'+ error });
   }
 };

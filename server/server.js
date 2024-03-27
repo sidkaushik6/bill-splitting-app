@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -11,14 +12,14 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, {
   cors: {
-    origin: 'http://localhost:3000', //  client URL 
+    origin: 'http://localhost:3000', // client URL
     methods: ['GET', 'POST'],
   },
 });
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors()); // This line requires the 'cors' module
 
 // MongoDB connection
 mongoose.connect('mongodb://localhost/bill-splitting-app', {
@@ -32,7 +33,6 @@ connection.once('open', () => {
 });
 
 // Routes
-// (Routes to be defined here later)
 app.use('/api/auth', authRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/friends', friendRoutes);
