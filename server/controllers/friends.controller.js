@@ -3,7 +3,9 @@ const User = require('../models/user.model');
 exports.sendFriendRequest = async (req, res) => {
   try {
     const { userId } = req.params;
-    const senderId = req.body.senderId;
+    //const senderId = req.body.senderId;
+    const senderId = req.userId; //Authenticated UserId as sender
+  
 
     // Add sender to the recipient's friend requests
     const recipient = await User.findById(userId);
@@ -62,7 +64,7 @@ exports.rejectFriendRequest = async (req, res) => {
 
 exports.getFriends = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.userId; // the authenticated user's ID
     const user = await User.findById(userId).populate('friends');
     res.status(200).json(user.friends);
   } catch (error) {
