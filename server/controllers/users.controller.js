@@ -6,6 +6,7 @@ exports.searchUsers = async (req, res) => {
     const users = await User.find({
       $or: [
         { name: { $regex: query, $options: 'i' } },
+        { username: { $regex: query, $options: 'i' } },
         { email: { $regex: query, $options: 'i' } },
       ],
     });
