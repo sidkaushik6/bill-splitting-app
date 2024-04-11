@@ -59,7 +59,7 @@ exports.updateOrder = async (req, res) => {
   // }
 
   try {
-    const { title, description, totalAmount, participants } = req.body;
+    const { title, description, totalAmount } = req.body;
     const order = await Order.findById(req.params.id);
 
     if (!order) {
@@ -71,13 +71,17 @@ exports.updateOrder = async (req, res) => {
       const updateData = {
         ...(title && { title }),
         ...(description && { description }),
-        ...(totalAmount && { totalAmount }),
+        totalAmount,
       };
 
+      // Calculate the new share for each participant
+      const totalParticipants = order.participants.length;
+      const newShare = totalAmount / totalParticipants;
+
       // Update the totalAmount and the share for each participant
-      const updatedParticipants = participants.map((p) => ({
+      const updatedParticipants = order.participants.map((p) => ({
         user: p.user,
-        share: totalAmount / participants.length,
+        share: newShare,
       }));
 
       const updatedOrder = await Order.findByIdAndUpdate(
