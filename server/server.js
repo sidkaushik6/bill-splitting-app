@@ -39,7 +39,7 @@ connection.once('open', () => {
 app.use('/api/auth', authRoutes);
 // app.use('/api/orders', orderRoutes);
 // app.use('/api/friends', friendRoutes);
-app.use('/api/orders', verifyToken, orderRoutes);
+app.use('/api/orders',verifyToken, orderRoutes);
 app.use('/api/friends', verifyToken, friendRoutes);
 app.use('/api/users', verifyToken, usersRoutes);
 
