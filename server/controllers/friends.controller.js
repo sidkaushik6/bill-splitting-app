@@ -3,8 +3,8 @@ const User = require('../models/user.model');
 exports.sendFriendRequest = async (req, res) => {
   try {
     const { userId } = req.params;
-    //const senderId = req.body.senderId;
-    const senderId = req.userId; //Authenticated UserId as sender
+    const senderId = req.body.senderId;
+    //const senderId = req.userId; //Authenticated UserId as sender
   
 
     // Add sender to the recipient's friend requests
