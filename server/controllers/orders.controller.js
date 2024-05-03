@@ -11,6 +11,7 @@ exports.createOrder = async (req, res) => {
       participants: [{ user: req.userId, share: totalAmount }],
     });
     const savedOrder = await newOrder.save();
+    //console.log('Request stuf ::::: ', req)
     res.status(201).json(savedOrder);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong" });

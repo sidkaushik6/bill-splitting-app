@@ -2,9 +2,9 @@ const User = require('../models/user.model');
 
 exports.sendFriendRequest = async (req, res) => {
   try {
-    const { userId } = req.params;
-    const senderId = req.body.senderId;
-    //const senderId = req.userId; //Authenticated UserId as sender
+    const { userId } = req.params; //This user id is Recipient's ObjectId in DB
+    // const senderId = req.body.senderId;
+    const senderId = req.userId; //Authenticated UserId as sender
   
 
     // Add sender to the recipient's friend requests
@@ -21,7 +21,8 @@ exports.sendFriendRequest = async (req, res) => {
 exports.acceptFriendRequest = async (req, res) => {
   try {
     const { requestId } = req.params;
-    const userId = req.body.userId;
+    //const userId = req.body.userId;
+    const userId = req.userId; // Authenticated userId of accepter
 
     // Remove the request from the recipient's friend requests
     const recipient = await User.findByIdAndUpdate(
@@ -32,6 +33,8 @@ exports.acceptFriendRequest = async (req, res) => {
 
     // Add the sender and recipient as friends
     recipient.friends.push(requestId);
+    // Save the recipient to persist the change
+    await recipient.save();
     const sender = await User.findByIdAndUpdate(
       requestId,
       { $push: { friends: userId } },
