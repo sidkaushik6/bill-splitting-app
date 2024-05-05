@@ -154,7 +154,7 @@ exports.viewFriendRequests = async (req, res) => {
         .json({ message: "User has no friend requests yet" });
     }
 
-    //Structured Response
+  
     const response = {
       friendRequests: user.friendRequests,
       totalFriendRequests: user.friendRequests.length, //metadata
